@@ -4,15 +4,8 @@ import { AuthContext } from '../providers/AuthProvider';
 
 const Navbar = () => {
 
-    const authInfo = useContext(AuthContext);
-    console.log(authInfo);
-
-    const name = "tahmid";
-    const age = 21;
-    const money = 223;
-
-    const person = {name, age, money};
-    console.log(person);
+    const { user } = useContext(AuthContext);
+    console.log(user);
 
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
@@ -41,7 +34,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                <a className="btn">{user?.email}</a>
             </div>
         </div>
     );

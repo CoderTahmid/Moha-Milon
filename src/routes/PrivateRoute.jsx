@@ -4,7 +4,11 @@ import { Navigate } from 'react-router-dom';
 
 const PrivateRoute = ({ children }) => {
 
-    const { user } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
+
+    if(loading) {
+        return <span className="loading loading-dots loading-xl"></span>
+    }
 
     if(user) {
         return children;

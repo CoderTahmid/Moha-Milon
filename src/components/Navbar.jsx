@@ -7,6 +7,13 @@ const Navbar = () => {
     const authInfo = useContext(AuthContext);
     console.log(authInfo);
 
+    const name = "tahmid";
+    const age = 21;
+    const money = 223;
+
+    const person = {name, age, money};
+    console.log(person);
+
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/login'>Login</NavLink></li>

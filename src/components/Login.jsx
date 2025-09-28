@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 
 const Login = () => {
-
-    const { signInUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const { signInUser, signInWithGoogle } = useContext(AuthContext);
 
     const handleLogin = e => {
         e.preventDefault();
@@ -15,11 +15,24 @@ const Login = () => {
         signInUser(email, password)
             .then(result => {
                 console.log(result);
+                e.target.reset();
+                navigate('/')
             })
             .catch(err => {
                 console.log("Error", err);
             })
     }
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(result => {
+                console.log(result);
+                navigate('/');
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }   
 
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -39,6 +52,9 @@ const Login = () => {
                         </fieldset>
                     </form>
                     <p className='ml-4 mb-4'>New to this website? <Link className='underline' to='/register'>Register</Link></p>
+                    <p>
+                        <button onClick={handleGoogleSignIn} className='btn btn-ghost'>Google</button>
+                    </p>
                 </div>
             </div>
         </div>
